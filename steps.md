@@ -5,4 +5,6 @@
 5. Home Page [ ];
 6. Details Page [ ];
 7. Edit Delete Page [ ];
+8. Business logic Page [ ];
+9. Bonus [ ];
 

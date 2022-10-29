@@ -5,8 +5,13 @@ async function createHouse(house) {
     await result.save();
 }
 
-async function getAllHouses() {
-    return House.find({}).lean();
+async function getAllHouses(search) {
+    const query = {};
+
+    if (search) {
+        query.type = new RegExp(search, 'i');
+    }
+    return House.find(query).lean();
 }
 
 
@@ -41,16 +46,21 @@ async function deleteHouse(id) {
     await House.findByIdAndDelete(id);
 }
 
-// async function sharePublication(publicationId, userId) {
-//     const publication = await Publication.findById(publicationId);
+async function rentHouse(houseId, userId) {
+    const house = await House.findById(houseId);
 
-//     if(publication.usersShared.includes(userId)) {
-//         throw new Error('You already share this publication');
-//     }
+    if(house.renters.includes(userId)) {
+        throw new Error('You already share this publication');
+    }
 
-//     publication.usersShared.push(userId);
-//     await publication.save();
-// }
+    house.renters.push(userId);
+    await house.save();
+}
+
+async function getAllByDate(search) {
+
+
+}
 
 // async function getPublicationsByUser(userId) {
 //     return Publication.find({ author: userId }).lean();
@@ -68,5 +78,6 @@ module.exports = {
     getHousesAndUsers,
     getHouseById,
     updateHouse,
-    deleteHouse
+    deleteHouse,
+    rentHouse
 }

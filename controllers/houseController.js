@@ -1,6 +1,6 @@
 const { isUser, isOwner } = require('../middleware/guards');
 const preload = require('../middleware/preload');
-const { createHouse, getAllHouses, u, updateHouse, deleteHouse } = require('../services/houseService');
+const { createHouse, getAllHouses, u, updateHouse, deleteHouse, rentHouse } = require('../services/houseService');
 const mapErrors = require('../util/mappers');
 
 const router = require('express').Router();
@@ -64,6 +64,32 @@ router.get('/delete/:id', preload(), isOwner(), async (req, res) => {
     await deleteHouse(req.params.id);
     res.redirect('/catalog');     
 });
+
+router.get('/rent/:id', isUser(), async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        await rentHouse(id, req.session.user._id);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        res.redirect('/catalog');     
+    }
+});
+
+router.get('/search', async (req, res) => {
+    const houses = await getAllHouses(req.query.search);
+    res.render('search', {
+        title: 'Search Page',
+        houses,
+        search: req.query.search
+    })
+})
+
+
+        
+        
+
 
 
 
