@@ -1,5 +1,4 @@
-//TODO replace with actual service;
-const collectionService = {};
+const houseService = require('../services/houseService');
 
 
 function preload(populate) {
@@ -7,13 +6,9 @@ function preload(populate) {
         const id = req.params.id;
 
         if (populate) {
-            
-            //TODO make it work 
-            res.locals.publication = await publicationService.getPublicationsAndUsers(id);
-            
-            //TODO make it work 
+            res.locals.house = await houseService.getHousesAndUsers(id);
         } else {
-            res.locals.publication = await publicationService.getPublicationById(id);
+            res.locals.house = await houseService.getHouseById(id);
         }
 
         next();

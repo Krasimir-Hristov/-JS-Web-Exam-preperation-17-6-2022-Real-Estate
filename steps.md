@@ -3,4 +3,5 @@
 3. Make the Create Page [ ];
 4. Catalog [ ];
 5. Home Page [ ];
+6. Details Page [ ];
 

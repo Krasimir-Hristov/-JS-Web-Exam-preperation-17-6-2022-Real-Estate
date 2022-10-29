@@ -13,13 +13,14 @@ async function getAllHouses() {
 async function getRecent() {
     return House.find({}).sort({ userCount: -1 }).limit(3).lean();
 }
-// async function getPublicationsAndUsers(id) {
-//     return Publication.findById(id).populate('author').populate('usersShared').lean();
-// }
 
-// async function getPublicationById(id) {
-//     return Publication.findById(id).lean();
-// }
+async function getHousesAndUsers(id) {
+    return House.findById(id).populate('renters').populate('owner').lean();
+}
+
+async function getHouseById(id) {
+    return House.findById(id).lean();
+}
 
 // async function updatePublication(id, publication) {
 //     const existing = await Publication.findById(id);
@@ -59,5 +60,7 @@ async function getRecent() {
 module.exports = {
     createHouse,
     getAllHouses,
-    getRecent
+    getRecent,
+    getHousesAndUsers,
+    getHouseById
 }

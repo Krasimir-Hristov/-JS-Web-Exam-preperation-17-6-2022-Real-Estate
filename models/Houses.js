@@ -1,7 +1,7 @@
 const { Schema, model, Types: { ObjectId } } = require('mongoose');
 
 
-const URL_PATTERN = /^https?:\/\/(.+)/;
+//const URL_PATTERN = /^https?:\/\/(.+)/;
 
 
 const houseSchema = new Schema({
