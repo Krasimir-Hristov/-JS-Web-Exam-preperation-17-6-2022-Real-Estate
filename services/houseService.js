@@ -22,20 +22,24 @@ async function getHouseById(id) {
     return House.findById(id).lean();
 }
 
-// async function updatePublication(id, publication) {
-//     const existing = await Publication.findById(id);
+async function updateHouse(id, house) {
+    const existing = await House.findById(id);
 
-//      existing.title = publication.title;
-//      existing.technique = publication.technique;
-//      existing.picture = publication.picture;
-//      existing.certificate = publication.certificate;
+     existing.name = house.name;
+     existing.type = house.type;
+     existing.year = Number(house.year);
+     existing.city = house.city;
+     existing.description = house.description;  
+     existing.availablePieces = house.availablePieces;
 
-//      await existing.save();
-// }
+   
 
-// async function deletePublication(id) {
-//     await Publication.findByIdAndDelete(id);
-// }
+     await existing.save();
+}
+
+async function deleteHouse(id) {
+    await House.findByIdAndDelete(id);
+}
 
 // async function sharePublication(publicationId, userId) {
 //     const publication = await Publication.findById(publicationId);
@@ -62,5 +66,7 @@ module.exports = {
     getAllHouses,
     getRecent,
     getHousesAndUsers,
-    getHouseById
+    getHouseById,
+    updateHouse,
+    deleteHouse
 }

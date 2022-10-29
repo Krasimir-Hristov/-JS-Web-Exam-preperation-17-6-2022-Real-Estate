@@ -4,4 +4,5 @@
 4. Catalog [ ];
 5. Home Page [ ];
 6. Details Page [ ];
+7. Edit Delete Page [ ];
 
