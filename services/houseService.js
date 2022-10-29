@@ -9,6 +9,10 @@ async function getAllHouses() {
     return House.find({}).lean();
 }
 
+
+async function getRecent() {
+    return House.find({}).sort({ userCount: -1 }).limit(3).lean();
+}
 // async function getPublicationsAndUsers(id) {
 //     return Publication.findById(id).populate('author').populate('usersShared').lean();
 // }
@@ -54,5 +58,6 @@ async function getAllHouses() {
 
 module.exports = {
     createHouse,
-    getAllHouses
+    getAllHouses,
+    getRecent
 }
